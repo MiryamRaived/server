@@ -1,18 +1,12 @@
-const express = require('express')
-const cors = require('cors')
-const items = require('./items')
-const users = require('./users')
-const winning = require('./winning')
-const app = express()
+const express = require("express");
+const mongoose = require("mongoose");
+const itemController=require("./controllers/itemController");
+const userController=require("./controllers/userController");
+const winningController=require("./controllers/winningController");
 
-
-app.use(express.json())
-app.use(cors())
-
-// controllers
-app.use(items)
-app.use(users)
-app.use(winning)
-
-app.listen(4500, () => console.log(`listening at http://localhost:4500`));
-
+const app = express();
+mongoose.connect("mongodb://localhost:27017/chinese-sale-2022")
+    .then(suc => console.log("mongo db connected"))
+    .catch(err =>
+        console.log(err)
+    )
